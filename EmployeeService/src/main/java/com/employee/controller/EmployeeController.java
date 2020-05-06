@@ -2,6 +2,8 @@ package com.employee.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,13 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService empservice;
 	
+	private static final Logger logger=LoggerFactory.getLogger(EmployeeController.class);
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Employee>> findAllemployees() throws RecordNotFoundException{
 		List<Employee> emplist=empservice.findByAllemp();
+		logger.debug("emplist size: "+emplist.size());
 		return new ResponseEntity<List<Employee>>(emplist, new HttpHeaders(), HttpStatus.OK);
 	}
 	
