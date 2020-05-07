@@ -45,7 +45,7 @@ public class EmployeeBatchConfiguration {
 		DefaultLineMapper<Employee> linemapper=new DefaultLineMapper<>();
 		DelimitedLineTokenizer linetokenizer=new DelimitedLineTokenizer();
 		BeanWrapperFieldSetMapper<Employee> bfsMapper=new BeanWrapperFieldSetMapper<>();
-		linetokenizer.setNames(new String[] {"id","ename","email","phoneNumber","designation","experience"});
+		linetokenizer.setNames(new String[] {"eid","ename","email","phoneNumber","designation","experience"});
 		linetokenizer.setIncludedFields(new int[] {0,1,2,3,4,5});
 		bfsMapper.setTargetType(Employee.class);
 		linemapper.setLineTokenizer(linetokenizer);//set lineTokenizer----
@@ -57,7 +57,8 @@ public class EmployeeBatchConfiguration {
 	@Bean
 	public FlatFileItemReader<Employee> reader(){
 		FlatFileItemReader<Employee> itemReader=new FlatFileItemReader<>();
-		itemReader.setResource(new ClassPathResource("emplist.csv"));
+		itemReader.setResource(new ClassPathResource("employlist.csv"));//employlist.csv
+		//itemReader.setResource(new url);
 		itemReader.setLinesToSkip(1);
 		itemReader.setLineMapper(lineMapper());
 		return itemReader;
@@ -68,7 +69,7 @@ public class EmployeeBatchConfiguration {
 		logger.debug("Enter JdbcBatchItemWriter method");
 		JdbcBatchItemWriter<Employee> itemWriter=new JdbcBatchItemWriter<>();
 		itemWriter.setDataSource(datasource);
-		itemWriter.setSql("insert into employee (id,ename,email,phoneNumber,designation,experience) values(:id,:ename,:email,:phoneNumber,:designation,:experience)");
+		itemWriter.setSql("insert into employee (eid,ename,email,phonenumber,designation,experience) values(:eid,:ename,:email,:phonenumber,:designation,:experience)");
 		itemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Employee>());
 		logger.debug("Exit JdbcBatchItemWriter method");
 		return itemWriter;

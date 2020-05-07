@@ -15,7 +15,7 @@ public class Employee {
 	private long eid;
 	private String ename;
 	private String email;
-	private long phoneNumber;
+	private long phonenumber;
 	private String designation;
 	private  long experience;
 	
@@ -38,11 +38,11 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getPhoneNumber() {
-		return phoneNumber;
+	public long getPhonenumber() {
+		return phonenumber;
 	}
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(long phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	public String getDesignation() {
 		return designation;
